@@ -7,7 +7,7 @@ HydrOffice SmartMap WebGis
 General info
 ------------
 
-.. image:: https://api.codacy.com/project/badge/Grade/083a753df426414baa163ed1d81c8e2e
+.. image:: https://api.codacy.com/project/badge/Grade/a80e91142635418bb2436ad65c487fd2
     :target: https://www.codacy.com/app/hydroffice/hyo_smartmap_webgis
     :alt: Codacy Status
 

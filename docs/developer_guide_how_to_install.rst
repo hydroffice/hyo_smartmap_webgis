@@ -25,3 +25,7 @@ How to install
 
   - Initialize ``eslint`` by executing ``eslint --init``.
   - Add to the required packages: ``npm install --save-dev gulp-eslint``
+
+- For updating ``npm``:
+
+  - Execute ``npm install -g npm@next``
