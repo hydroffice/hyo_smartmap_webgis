@@ -1,0 +1,61 @@
+# Byte-compiled / optimized
+__pycache__/
+*.pyc
+*.pyo
+*.cache/
+
+# pycharm files
+.idea/
+
+# Microsoft installers
+*.msi
+
+# Windows executable
+*.exe
+
+# Mac OS X installers
+*.dmg
+
+# C extensions
+*.so
+*.pyd
+
+# npm debugging logs
+npm-debug.log*
+
+# project dependencies
+js/node_modules/
+
+# gulped files
+js/public/dist
+js/public/es5
+
+# docs temporary folder
+docs/_build/
+
+# OSX folder attributes
+.DS_Store
+
+# temporary files
+*.tmp
+*~
+py/examples/tmp
+py/tests/tmp
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
