@@ -1,0 +1,340 @@
+.modal {
+    z-index: 2000;
+}
+
+#survey-planner {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, .5);
+    left: 42%;
+    top: 35%;
+    z-index: 1080;
+    border-radius: 3px;
+}
+
+#survey-planner p {
+    font-size: 0.8em;
+    margin: 0 auto;
+    color: #235b8c;
+    text-align: center;
+    white-space: nowrap;
+    display: inline;
+}
+
+#survey-planner div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* heading */
+
+#survey-planner-heading {
+    background-color: rgba(255, 255, 255, 0.0);
+    color: #235b8c;
+    border: 0 solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    padding: 1px 1px;
+}
+
+#survey-planner-heading-text {
+    font-weight: bold;
+    font-size: 0.9em;
+    margin: 2px 1px 0;
+}
+
+#survey-planner-close button.close {
+    font-size: 0.9em;
+    letter-spacing: 0;
+    background: #eeeeee;
+    color: #aaaaaa;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    margin: 2px;
+    padding: 1px 3px;
+    opacity: 1.0;
+}
+
+#survey-planner-close button.close:hover,
+#survey-planner-close button.close:focus {
+    background-color: #aaaaaa;
+    color: #235b8c;
+}
+
+/* tools */
+
+#survey-planner-tools {
+    background: rgba(255, 255, 255, 0.0);
+    color: #235b8c;
+    border: 0 solid #cccccc;
+    height: 100%;
+    width: 3.6em;
+    float: left;
+    padding: 8px 2px;
+}
+
+.survey-planner-tools-btn {
+    margin-bottom: 1px;
+    color: #235b8c;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #ccc;
+    width: 2.6em;
+    height: 2.5em;
+    padding: 6px;
+}
+
+.survey-planner-tools-btn.active {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(35, 91, 140, 0.6);
+    border-color: #ccc;
+}
+
+.survey-planner-tools-btn:hover, .survey-planner-tools-btn:focus {
+    color: #235b8c;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #d99d36;
+}
+
+.survey-planner-tools-btn.active:hover, .survey-planner-tools-btn.active:focus {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(35, 91, 140, 0.6);
+    border-color: #d99d36;
+}
+
+#survey-planner-draw-lines {
+    background-image: url('../img/lines-blue.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-draw-lines.active {
+    background-image: url('../img/lines-white.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-draw-polygons {
+    background-image: url('../img/area-blue.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-draw-polygons.active {
+    background-image: url('../img/area-white.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-modify-lines {
+    background-image: url('../img/lines-edit-blue.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-modify-lines.active {
+    background-image: url('../img/lines-edit-white.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-modify-areas {
+    background-image: url('../img/area-edit-blue.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-modify-areas.active {
+    background-image: url('../img/area-edit-white.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-parallel-lines {
+    background-image: url('../img/lines-parallel-blue.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-parallel-lines.active {
+    background-image: url('../img/lines-parallel-white.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-clip-lines {
+    background-image: url('../img/lines-clip-blue.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+#survey-planner-clip-lines.active {
+    background-image: url('../img/lines-clip-white.png');
+    background-size: 2.6em 2.5em;
+    width: 2.6em;
+    height: 2.5em;
+}
+
+/* editor */
+
+#survey-planner-editor {
+    border: 0 solid #cccccc;
+    border-left: 1px solid #cccccc;
+    margin-left: 1.0em;
+    width: 16.0em;
+    height: 21.2em;
+    float: right;
+    padding: 8px 4px;
+}
+
+#survey-planner-editor .nav-tabs {
+    max-height: 42px;
+}
+
+#survey-planner-editor ul li {
+    color: #235b8c;
+    font-size: 11px;
+    border-color: rgba(255, 255, 255, 0.9);
+    text-align: left;
+}
+
+#survey-planner-editor ul li a {
+    color: rgba(35, 91, 140, 0.6);
+    font-size: 12px;
+    padding: 5px 10px;
+    border-color: rgba(180, 180, 180, 0.9);
+    background-color: rgba(180, 180, 180, 0.6);
+}
+
+#survey-planner-editor ul li a:focus,
+#survey-planner-editor ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: #d99d36;
+    color: #235b8c;
+}
+
+#survey-planner-editor ul li.active a {
+    color: #235b8c;
+    border-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#survey-planner-editor ul li.active a:focus,
+#survey-planner-editor ul li.active a:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #d99d36;
+    color: #235b8c;
+}
+
+#survey-planner-editor .tab-content {
+    font-size: 11px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.8);
+    color: #235b8c;
+    padding: 0;
+}
+
+.survey-planner-editor-menu-heading {
+    font-size: 11px;
+    display: inline-block;
+    margin: 6px 0 0 0;
+}
+
+#survey-planner-tab-lines {
+    margin-bottom: 5px;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 100%;
+}
+
+#survey-planner-tab-areas {
+    margin-bottom: 5px;
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.9);
+    height: 100%;
+}
+
+.survey-planner-editor-menu {
+    border-bottom: 1px solid grey;
+    padding: 5px 0 5px 0;
+    margin-bottom: 6px;
+}
+
+.survey-planner-editor-menu-btn {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    float: right;
+    padding: 0 4px 0 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.survey-planner-editor-menu-btn:focus,
+.survey-planner-editor-menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+    border-color: #d99d36;
+    color: #235b8c;
+}
+
+/* treeviews */
+
+#survey-planner-lines {
+    height: 18.0em;
+    overflow: auto;
+}
+
+#survey-planner-areas {
+    height: 18.0em;
+    overflow: auto;
+}
+
+#survey-planner-editor .list-group-item {
+    padding: 2px 2px 2px 4px;
+}
+
+/* tooltips */
+.tooltip {
+    position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 3px;
+    color: white;
+    padding: 2px 4px;
+    opacity: 0.7;
+    white-space: nowrap;
+    font-size: 10px;
+}
+
+.tooltip-measure {
+    font-weight: bold;
+}
+
+.tooltip-static {
+    background-color: #ffeda5;
+    color: #235b8c;
+    border: 1px solid white;
+}
+
+.tooltip-measure:before,
+.tooltip-static:before {
+    border-top: 6px solid rgba(0, 0, 0, 0.5);
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    margin-left: -7px;
+    left: 50%;
+}
+
+.tooltip-static:before {
+    border-top-color: #ffeda5;
+}

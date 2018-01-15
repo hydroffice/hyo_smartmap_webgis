@@ -15,3 +15,5 @@ In brief
 Sea Mappers' Acoustic Ray Tracing Monitor And Planner (SmartMap) Tools assist in oceanographic data monitoring and survey planning.
 
 SmartMap WebGIS provides a WebGIS access to `SmartMap <https://www.hydroffice.org/smartmap/main>`_ data products.
+
+The source code is available on `GitHub <https://github.com/hydroffice/hyo_smartmap_webgis>`_.

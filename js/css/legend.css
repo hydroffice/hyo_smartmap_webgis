@@ -1,0 +1,70 @@
+#map-legend {
+    display: block;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    left: 0.5em;
+    top: 5.5em;
+    z-index: 100;
+    border-radius: 3px;
+}
+
+#map-legend p {
+    font-size: 0.8em;
+    margin: 0 auto;
+    color: #235b8c;
+    text-align: center;
+    white-space: nowrap;
+    display: inline;
+}
+
+#map-legend img {
+    display: block;
+    margin: 0 auto;
+}
+
+#map-legend div {
+    margin: 0 auto;
+    text-align: center;
+}
+
+#map-legend div #map-legend-close {
+    font-size: 0.6em;
+    letter-spacing: 0;
+    background-color: #eeeeee;
+    color: #aaaaaa;
+    border: 1px solid #cccccc;
+    radius: 2px;
+    margin: 0 0 2px;
+    padding: 0 4px;
+}
+
+#map-legend div #map-legend-close:hover,
+#map-legend div #map-legend-close:focus {
+    background-color: #aaaaaa;
+    color: #235b8c;
+}
+
+@media screen and (max-width: 768px) {
+    #map-legend {
+        top: 5.5em;
+    }
+
+    #map-legend p {
+        font-size: 0.5em;
+        margin: 2px 1px 0;
+    }
+
+    #map-legend div #map-legend-close {
+        font-size: 0.5em;
+        margin: 0;
+        padding: 0 3px;
+    }
+}
+
+#map-legend-info {
+    border: 0 solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 1px 1px;
+}

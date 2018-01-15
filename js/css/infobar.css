@@ -1,0 +1,41 @@
+#info-bar {
+    width: 100%;
+    display: table;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    top: calc(100% - 2.5em);
+    z-index: 50;
+    height: 1.5em;
+    font-size: 0.9em;
+}
+
+#info-bar > div {
+    height: 100%;
+    display: table-cell;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+#info-bar #info-bar-message {
+    text-align: center;
+    padding-left: 1em;
+    width: 50%;
+}
+
+#info-bar #info-bar-mouse-position {
+    width: 30%;
+    padding: 0 9px;
+    text-align: left;
+}
+
+#info-bar #info-bar-place-holder {
+    width: 25%;
+}
+
+@media screen and (max-width: 768px) {
+    #info-bar {
+        top: calc(100% - 3.5em);
+        font-size: 0.7em;
+        height: 3.0em;
+    }
+}

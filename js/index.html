@@ -1,0 +1,699 @@
+<!-- vi: sw=4 -->
+<!DOCTYPE html>
+<!-- Copyright (c) 2018 Center for Coastal and Ocean Mapping, University of New Hampshire -->
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="HydrOffice Sea Mappers' Acoustic Ray-Tracing Monitoring and Planning Tools"/>
+    <meta name="author" content="co-authored by giumas, seangkelley, and SevenBits"/>
+    <title>SmartMap</title>
+
+    <link rel="shortcut icon" href="https://www.hydroffice.org/smartmap/img/favicon.ico"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/4.2.0/ol.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.0/css/bootstrap-datepicker.min.css"/>
+    <link rel="stylesheet"
+          href="https://rawgit.com/patternfly/patternfly-bootstrap-treeview/v2.1.5/dist/bootstrap-treeview.css"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-custom.css"/>
+    <link rel="stylesheet" href="css/legend.css"/>
+    <link rel="stylesheet" href="css/about.css"/>
+    <link rel="stylesheet" href="css/animationslider.css"/>
+    <link rel="stylesheet" href="css/transparencyslider.css"/>
+    <link rel="stylesheet" href="css/infobar.css"/>
+    <link rel="stylesheet" href="css/surveyplanner.css"/>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-57787642-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+</head>
+<body>
+<nav class="navbar navbar-default">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" target="_blank" data-toggle="tooltip"
+           title="Go to the HydrOffice home"
+           href="https://www.hydroffice.org/">HydrOffice</a>
+        <a class="navbar-brand" target="_blank" data-toggle="tooltip"
+           title="Go to the SmartMap info page"
+           href="https://www.hydroffice.org/smartmap/main">SmartMap</a>
+        <a class="navbar-brand alpha" target="_blank" data-toggle="tooltip"
+           title="Go to SmartMap GeoServer info page"
+           href="https://smartmap.ccom.unh.edu/geoserver/web/"></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li class="page-scroll">
+                <a href="#" data-toggle="" data-target="" title="Legend" id="map-legend-toggle">
+                    <i class="fa fa-list-alt"></i>
+                    <p class="navbar-text visible-xs-inline-block">Legend</p>
+                </a>
+            </li>
+            <li class="page-scroll">
+                <a href="#" data-toggle="" data-target="" id="survey-planner-toggle" title="Survey Planner">
+                    <i class="fa fa-pencil-square-o"></i>
+                    <p class="navbar-text visible-xs-inline-block">Survey Planner</p>
+                </a>
+            </li>
+            <li class="dropdown" data-toggle="tooltip" title="Tools">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <i class="fa fa-sliders"></i>
+                    <p class="navbar-text visible-xs-inline-block">Tools</p>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li id="dropdown-menu-date-picker">
+                        <a href="#date-picker" data-toggle="modal" title="Pick a date">Date picker</a>
+                    </li>
+                    <li>
+                        <a href="#base-maps" data-toggle="modal" title="Select a basemap">Basemaps</a>
+                    </li>
+                    <li>
+                        <a href="#data-layers" data-toggle="modal" title="Select a data layer">Data layers</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="" data-target="" title="Set data transparency" id="transparency-slider-toggle">Data transparency</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="" data-target="" title="Show animation slider" id="animation-slider-toggle">Time slider</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="" data-target="" title="Set location tracking" id="location-tracking-toggle">Track location</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="" data-target="" title="Show line scale" id="linear-scale-toggle">Show scale</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="" data-target="" title="Show info bar" id="info-bar-toggle">Info bar</a>
+                    </li>
+                    <li>
+                        <a href="#capabilities-url" data-toggle="modal" title="GetCapabilities url">GetCapabilities url</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="page-scroll">
+                <a href="#save-formats" data-toggle="modal" title="Save data">
+                    <i class="fa fa-floppy-o"></i>
+                    <p class="navbar-text visible-xs-inline-block">Save</p>
+                </a>
+            </li>
+            <li class="divider-vertical"></li>
+            <li class="page-scroll">
+                <a href="#" data-toggle="modal"
+                   data-target="#about-dialog" title="About SmartMap">
+                    <i class="fa fa-info"></i>
+                    <p class="navbar-text visible-xs-inline-block">About</p>
+                </a>
+            </li>
+            <li class="page-scroll" data-toggle="tooltip" title="Contact us">
+                <a href="https://www.hydroffice.org/#contact">
+                    <i class="fa fa-envelope"></i>
+                    <p class="navbar-text visible-xs-inline-block">Contact Us</p>
+                </a>
+            </li>
+            <li class="dropdown" data-toggle="tooltip" title="Shortcuts to project pages">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <i class="fa fa-list-ul"></i>
+                    <p class="navbar-text visible-xs-inline-block">Other Projects</p>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="https://www.hydroffice.org/smartmap/main" data-toggle="tooltip"
+                           title="Go to SmartMap project">SmartMap</a>
+                    </li>
+                    <li>
+                        <a href="https://www.hydroffice.org/soundspeed/main" data-toggle="tooltip"
+                           title="Go to Sound Speed project">Sound Speed</a>
+                    </li>
+                    <li>
+                        <a href="https://www.hydroffice.org/huddl/main" data-toggle="tooltip"
+                           title="Go to Huddl project">Huddl</a>
+                    </li>
+                    <li>
+                        <a href="https://www.hydroffice.org/bag/main" data-toggle="tooltip"
+                           title="Go to BAG Explorer project">BAG Explorer</a>
+                    </li>
+                    <li>
+                        <a href="https://www.hydroffice.org/qctools/main" data-toggle="tooltip"
+                           title="Go to QC Tools project">QC Tools</a>
+                    </li>
+                    <li>
+                        <a href="https://www.hydroffice.org/oceano/main" data-toggle="tooltip"
+                           title="Go to Oceano project">Oceano</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>
+
+<!-- Date picker -->
+<div class="modal fade" id="date-picker" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Pick a date</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group date">
+                    <input type="text" class="form-control" data-date-end-date="0d"><span class="input-group-addon">
+                    <i class="glyphicon glyphicon-th"></i></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Date source picker -->
+<div class="modal fade" id="data-layers" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select a data layer</h4>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sourceDataRadios" class="source-pick" id="sourceDataRtofs" value="rtofs"
+                           disabled>
+                    RTOFS
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sourceDataRadios" class="source-pick" id="sourceDataGomfs" value="gomfs"
+                           disabled>
+                    GoMOFS
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="sourceDataRadios" class="source-pick" id="sourceDataWoa13" value="woa13"
+                           disabled>
+                    WOA 2013
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Base map picker -->
+<div class="modal fade" id="base-maps" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select a basemap</h4>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="baseMapRadios" class="base-pick" id="baseMapAerial" value="aerial">
+                    Aerial Imagery
+                </label>
+            </div>
+	        <div class="radio">
+                <label>
+                    <input type="radio" name="baseMapRadios" class="base-pick" id="baseMapEtopo1" value="etopo1">
+                    ETOPO1
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="baseMapRadios" class="base-pick" id="baseMapGebco" value="gebco">
+                    GEBCO
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="baseMapRadios" class="base-pick" id="baseMapGeotopo" value="geotopo"
+                           disabled>
+                    GeoTopo30
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="baseMapRadios" class="base-pick" id="baseMapNoaaRnc" value="noaa-rnc">
+                    NOAA RNC
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="baseMapRadios" class="base-pick" id="baseMapOsm" value="osm">
+                    OpenStreetMap
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export dialog -->
+<div class="modal fade" id="save-formats" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Select a format</h4>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="saveFormatRadios" class="format-pick" id="saveFormatRadios1"
+                           value="kml" checked>
+                    KML
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="saveFormatRadios" class="format-pick" id="saveFormatRadios2"
+                           value="kmz">
+                    KMZ
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="saveFormatRadios" class="format-pick" id="saveFormatRadios3"
+                           value="geotiff">
+                    GeoTiff
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="export-data">Export</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- GetCapabilities dialog -->
+<div class="modal fade" id="capabilities-url" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">GetCapabilities</h4>
+            </div>
+            <div class="modal-body">
+                <input id="getCapabilitiesURLText" class="form-control" onClick="this.setSelectionRange(0, this.value.length)" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- OpenLayer -->
+<div class="map-container">
+
+    <div id="map" class="map">
+
+        <!-- Legend -->
+        <div id="map-legend">
+            <div><p id="map-legend-info"></p></div>
+            <div><img src="img/nodata.png" id="map-legend-img"/></div>
+            <div><p id="map-legend-source"></p></div>
+            <div><p id="map-legend-date"></p></div>
+            <div><button id="map-legend-close">X</button></div>
+        </div>
+
+        <!-- Info -->
+        <div id="info-bar">
+            <div id="info-bar-mouse-position"></div>
+            <div id="info-bar-message"></div>
+            <div id="info-bar-place-holder"></div>
+        </div>
+
+        <div id="bottom-sliders">
+            <!-- Transparency -->
+            <div id="transparency-slider-bar">
+                <input id="transparency-slider" type="range" min="0" max="100" value="0" step="2"/>
+                <p id="transparency-slider-value">0.0%</p>
+            </div>
+
+            <!-- Animation -->
+            <div id="animation-slider-bar" class="row">
+                <div id="animation-slider-bar-left" class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                    <a href="#" data-toggle="" data-target="" title="Play" id="animation-slider-play">
+                        <i class="fa fa-play"></i>
+                    </a>
+                </div>
+                <div id="animation-slider-bar-middle" class="col-xs-8 col-sm-10 col-md-10 col-lg-10">
+                    <input id="animation-slider" type="range" min="0" max="7" value="0" step="1"/>
+                </div>
+                <div id="animation-slider-bar-right" class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                    <a href="#play-config" data-toggle="modal" title="Play Config" id="play-config-toggle">
+                        <i class="fa fa-cogs"></i>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <p id="animation-slider-value">---</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BARS -->
+
+<!-- Play configuration -->
+<div class="modal fade" id="play-config" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Play Config</h4>
+            </div>
+            <div class="modal-body">
+                <label class="" for="play-config-auto-checkbox"><input id="play-config-auto-checkbox" type="checkbox" value=""> &nbsp;&nbsp; Auto-check for Server Updates</label>
+                <br>
+                <label class="" for="play-config-slider">Framerate: &nbsp; <span id="play-config-speed">1</span> frames/sec</label>
+                <input id="play-config-slider" type="range" min="1" max="12" value="4" step="1"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DIALOGS -->
+
+<!-- Survey Planner -->
+<div id="survey-planner">
+    <div class="panel" id="survey-planner-heading">
+        <div id="survey-planner-close"><button type="button" class="close">&times;</button></div>
+        <div><p id="survey-planner-heading-text">Survey Planner [Beta]</p></div>
+    </div>
+    <div id="survey-planner-tools">
+        <button id="survey-planner-collapse-editor" class="btn btn-default survey-planner-tools-btn" title="Collapse"><i class="fa fa-angle-double-left"></i></button>
+        <button id="survey-planner-select-objects" class="btn btn-default survey-planner-tools-btn" title="Select Object"><i class="fa fa-mouse-pointer"></i></button>
+        <button id="survey-planner-draw-lines" class="btn btn-default survey-planner-tools-btn" title="Draw Lines"></button>
+        <button id="survey-planner-modify-lines" class="btn btn-default survey-planner-tools-btn" title="Modify Lines"></button>
+        <button id="survey-planner-draw-polygons" class="btn btn-default survey-planner-tools-btn" title="Draw Areas"></button>
+        <button id="survey-planner-modify-areas" class="btn btn-default survey-planner-tools-btn" title="Modify Areas"></button>
+        <button id="survey-planner-parallel-lines" class="btn btn-default survey-planner-tools-btn" title="Create Parallel Lines"></button>
+        <button id="survey-planner-clip-lines" class="btn btn-default survey-planner-tools-btn" title="Clip Lines Against Area"></button>
+    </div>
+    <div id="survey-planner-editor">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#survey-planner-tab-lines" aria-controls="lines" role="tab" data-toggle="tab">Lines</a></li>
+            <li role="presentation"><a href="#survey-planner-tab-areas" aria-controls="areas" role="tab" data-toggle="tab">Areas</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="survey-planner-tab-lines">
+                <div class="survey-planner-editor-menu">
+                    <h4 class="survey-planner-editor-menu-heading">Menu</h4>
+                    <div href="#export-lines" data-toggle="modal" class="survey-planner-editor-menu-btn" title="Export Selected">
+                        <i class="fa fa-upload"></i>
+                    </div>
+                    <div href="#import-lines" data-toggle="modal" class="survey-planner-editor-menu-btn" title="Import">
+                        <i class="fa fa-download"></i>
+                    </div>
+                    <div id="survey-planner-lines-delete" href="#" class="survey-planner-editor-menu-btn" title="Delete Selected">
+                        <i class="fa fa-trash-o"></i>
+                    </div>
+                    <div id="survey-planner-lines-check-all" href="#" class="survey-planner-editor-menu-btn" title="Select All">
+                        <i class="fa fa-check-square-o"></i>
+                    </div>
+                </div>
+                <div id="survey-planner-lines">
+                    No lines drawn.
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="survey-planner-tab-areas">
+                <div class="survey-planner-editor-menu">
+                    <h4 class="survey-planner-editor-menu-heading">Menu</h4>
+                    <div href="#export-areas" data-toggle="modal" class="survey-planner-editor-menu-btn" title="Export Selected">
+                        <i class="fa fa-upload"></i>
+                    </div>
+                    <div href="#import-areas" data-toggle="modal" class="survey-planner-editor-menu-btn" title="Import">
+                        <i class="fa fa-download"></i>
+                    </div>
+                    <div id="survey-planner-areas-delete" href="#" class="survey-planner-editor-menu-btn" title="Delete Selected">
+                        <i class="fa fa-trash-o"></i>
+                    </div>
+                    <div id="survey-planner-areas-check-all" class="survey-planner-editor-menu-btn" title="Select All">
+                        <i class="fa fa-check-square-o"></i>
+                    </div>
+                </div>
+                <div id="survey-planner-areas">
+                    No areas drawn.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Parallel Lines -->
+<div class="modal fade" id="parallel-lines" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Parallel Lines</h4>
+            </div>
+            <div class="modal-body">
+                <h4>Line <span id="parallel-line-id"></span></h4>
+                <div class="form-group">
+                    <label for="parallel-lines-amount" class="control-label">Amount of Lines:</label>
+                    <input type="number" id="parallel-lines-amount" class="form-control" placeholder="1" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="parallel-lines-side" class="control-label">Direction:</label>
+                    <select id="parallel-lines-side" class="form-control">
+                        <option value="portside">Portside</option>
+                        <option value="starboard">Starboard</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="parallel-lines-spacing" class="control-label">Spacing (m):</label>
+                    <input type="number" id="parallel-lines-spacing" class="form-control" placeholder="1.00" step="0.01" min="0">
+                </div>
+                <button type="button" class="btn btn-default" id="create-parallel-lines-button">Create Lines</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Import Lines -->
+<div class="modal fade" id="import-lines" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Import Lines</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="import-line-format">Format:</label>
+                    <select id="import-line-format" class="form-control">
+                        <option value="geojson">GeoJSON</option>
+                        <option value="hypack">HYPACK *.lnw</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="import-line-srs">SRS:</label>
+                    <select id="import-line-srs" class="form-control">
+                        <option value="">Select SRS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="import-line-file" class="control-label">Select File:</label>
+                    <input id="import-line-file" type="file" >
+                </div>
+                <button type="button" class="btn btn-default" id="import-lines-button">
+                    <i class="fa fa-download"></i> &nbsp; Import</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Export Lines -->
+<div class="modal fade" id="export-lines" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Export Lines</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="export-line-format">Format:</label>
+                    <select id="export-line-format" class="form-control">
+                        <option value="geojson">GeoJSON</option>
+                        <option value="hypack">HYPACK *.lnw</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="export-line-srs">SRS:</label>
+                    <select id="export-line-srs" class="form-control">
+                        <option value="">Select SRS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="export-line-filename">Filename:</label>
+                    <input id="export-line-filename" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-default" id="export-lines-button">
+                    <i class="fa fa-download"></i> &nbsp; Export</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Import Areas -->
+<div class="modal fade" id="import-areas" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Import Areas</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="import-area-format">Format:</label>
+                    <select id="import-area-format" class="form-control">
+                        <option value="geojson">GeoJSON</option>
+                        <option value="hypack">HYPACK *.brd</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="import-area-srs">SRS:</label>
+                    <select id="import-area-srs" class="form-control">
+                        <option value="">Select SRS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="import-area-file" class="control-label">Select File:</label>
+                    <input id="import-area-file" type="file" >
+                </div>
+                <button type="button" class="btn btn-default" id="import-areas-button">
+                    <i class="fa fa-download"></i> &nbsp; Import</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Export Areas -->
+<div class="modal fade" id="export-areas" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Export Areas</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="export-area-format">Format:</label>
+                    <select id="export-area-format" class="form-control">
+                        <option value="geojson">GeoJSON</option>
+                        <option value="hypack">HYPACK *.brd</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="export-area-srs">SRS:</label>
+                    <select id="export-area-srs" class="form-control">
+                        <option value="">Select SRS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="export-area-filename">Filename:</label>
+                    <input id="export-area-filename" class="form-control" />
+                </div>
+                <button type="button" class="btn btn-default" id="export-areas-button">
+                    <i class="fa fa-download"></i> &nbsp; Export</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- About dialog -->
+<div id="about-dialog" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">About Smartmap</h4>
+            </div>
+            <div class="modal-body">
+                <div class="center">
+                    <img class="resize" src="https://www.hydroffice.org/static/mysmartmap/img/logo.png"
+                         alt="SmartMap logo"/>
+                    <h1>Hydroffice SmartMap</h1>
+                    <small id="about-dialog-version-tag"></small>
+                </div>
+                <p>The Sea Mapper's Acoustic Ray Tracing Monitor and Planning (SmartMap) project aims
+                    to provide tools to evaluate the impact of oceanographic temporal and spatial
+                    variability on hydrographic surveys.</p>
+                <p>The SmartMap's research is funded under the NOAA Grant NA15NOS4000200 and the NSF Grant 1524585.</p>
+                <div class="center">
+                    <small>Contacts</small>
+                    <p>
+                        <a href="mailto:gmasetti@ccom.unh.edu?Subject=SmartMap%20support" target="_top">G.Masetti</a>;
+                        <a href="mailto:pjohnson@ccom.unh.edu?Subject=SmartMap%20support" target="_top">P.Johnson</a>;
+                        <a href="mailto:jbeaudoin@ccom.unh.edu?Subject=SmartMap%20support" target="_top">J.Beaudoin</a>;
+                        <a href="mailto:rbowring@ccom.unh.edu?Subject=SmartMap%20support" target="_top">R.Bowring</a>;
+                        <a href="mailto:skelley@ccom.unh.edu?Subject=SmartMap%20support" target="_top">S.Kelley</a>.
+                    </p>
+                </div>
+                <p class="smaller">2017 &copy; University of New Hampshire, Center for Coastal and Ocean Mapping</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="about-dialog-more">More info</button>
+                <button type="button" class="btn btn-default" id="about-dialog-manual">Manual</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BUNDLE JS -->
+
+<script src="public/dist/smartmap.bundle.js" type="text/javascript"></script>
+
+</body>
+</html>

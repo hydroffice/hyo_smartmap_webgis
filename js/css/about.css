@@ -1,0 +1,46 @@
+#about-dialog h1 {
+    text-transform: none;
+    font-size: 1.2em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#about-dialog p {
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+
+#about-dialog p.smaller {
+    font-size: 0.8em;
+    margin-top: 9px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+#about-dialog img.resize {
+    max-width: 40%;
+    max-height: 40%;
+}
+
+#about-dialog .center {
+    text-align: center;
+}
+
+#about-dialog #about-dialog-version-tag {
+    font-size: 0.8em;
+}
+
+#about-dialog a {
+    color: #337ab7;
+    font-weight: 600;
+}
+
+#about-dialog a:hover,
+a:focus,
+a:active,
+a.active {
+    color: #d99d36;
+    outline: none;
+    text-decoration: none;
+}
