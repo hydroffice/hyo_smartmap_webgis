@@ -24,6 +24,7 @@
   "dependencies": {
     "@turf/nearest-point": "^6.0.1",
     "@turf/turf": "^5.1.6",
+    "babel-core": "^6.26.3",
     "bootstrap": "^4.1.1",
     "bootstrap-datepicker": "^1.8.0",
     "bootstrap-slider": "^10.0.2",
@@ -34,6 +35,8 @@
     "npm-git-install": "^0.3.0",
     "openlayers": "^4.6.5",
     "patternfly-bootstrap-treeview": "^2.1.5",
+    "popper": "^1.0.1",
+    "popper.js": "^1.14.4",
     "proj4": "^2.4.4"
   }
 }
